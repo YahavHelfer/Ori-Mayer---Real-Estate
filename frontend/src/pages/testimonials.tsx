@@ -1,18 +1,11 @@
 // frontend/src/pages/testimonials.tsx
+
 import Head from 'next/head';
 import Image from 'next/image';
 import { FaQuoteLeft, FaStar } from 'react-icons/fa';
+import type { Testimonial } from '@/types'; // <--- הוספתי ייבוא מהקובץ המרכזי
 
-// הגדרת טיפוס (Interface) מעודכן להמלצה
-interface Testimonial {
-  id: number;
-  name: string; // שם הממליץ
-  role?: string; // תפקיד או תיאור (למשל, "קונה דירה, תל אביב")
-  text: string; // תוכן ההמלצה
-  avatarUrl?: string; // (אופציונלי) URL לתמונה של הממליץ (שים ב-public/avatars)
-  date?: string; // (אופציונלי) תאריך ההמלצה
-  rating?: number; // (אופציונלי) דירוג בכוכבים (1-5)
-}
+// הגדרת טיפוס (Interface) הוסרה מכאן כי היא עברה לקובץ המרכזי
 
 // ההמלצות האמיתיות שלך
 const testimonialsData: Testimonial[] = [
@@ -32,6 +25,7 @@ const testimonialsData: Testimonial[] = [
     date: 'אפריל 2025',
     rating: 5,
   },
+  // ... שאר ההמלצות נשארות כפי שהן
   {
     id: 3,
     name: "ארי מנדלוביץ'",
@@ -62,7 +56,7 @@ const testimonialsData: Testimonial[] = [
     role: 'מכרה דירה',
     text: 'בשעה טובה מכרנו דירה בעזרת אורי מאיר, אורי קודם כל "בן אדם", ישר, אמין, מקצועי, ואדיב, תודה רבה.',
     date: 'דצמבר 2024',
-    rating: 5, // שיניתי ל-5, תוכל להתאים
+    rating: 5,
   },
 ];
 

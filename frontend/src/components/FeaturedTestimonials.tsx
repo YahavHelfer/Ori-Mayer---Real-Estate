@@ -1,7 +1,7 @@
 // frontend/src/components/FeaturedTestimonials.tsx
 import Link from 'next/link';
 import { FaQuoteLeft, FaStar } from 'react-icons/fa';
-import type { Testimonial } from '../pages/testimonials'; // נניח שהגדרת את הטיפוס שם
+import type { Testimonial } from '@/types'; // <--- הוספתי ייבוא מהקובץ המרכזי
 
 // העתק את הנתונים מעמוד ההמלצות או ייבא אותם
 const testimonialsData: Testimonial[] = [
