@@ -335,26 +335,27 @@ export default function PropertyPage({ property, coordinates }: PropertyPageProp
             </section>
           )}
 
-          <section>
-             <h2 className="text-2xl font-semibold text-gray-800 mb-4 border-b pb-2">מאפייני הנכס</h2>
-             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-4 text-gray-700">
-             <BooleanFeature label="מרפסת" value={property.hasBalcony ?? false} />
-<BooleanFeature label="חניה" value={!!property.parking} />
-{property.airConditioning ? (
-  <DetailItem text={`מיזוג: ${property.airConditioning}`} />
-) : (
-  <BooleanFeature label="מיזוג" value={false} />
-)}
-                 <BooleanFeature label="מחסן" value={property.hasStorage} />
-                 <BooleanFeature label='ממ"ד' value={property.hasSecureRoom} />
-                 <BooleanFeature label="נגישות" value={property.isAccessible} />
-                 <BooleanFeature label="משופץ" value={property.isRenovated} />
-                 <BooleanFeature label="סורגים" value={property.hasBars} />
-                 <DetailItem text={property.directions ? `כיווני אוויר: ${property.directions}` : undefined} />
-                 <DetailItem text={property.boiler ? `דוד: ${property.boiler}` : undefined} />
-                 <DetailItem icon={<BsCalendarCheck className="text-custom-gold" />} text={property.evacuationDate ? `פינוי: ${property.evacuationDate}` : undefined}/>
-             </div>
-          </section>
+<section>
+  <h2 className="text-2xl font-semibold text-gray-800 mb-4 border-b pb-2">מאפייני הנכס</h2>
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-4 text-gray-700">
+    <BooleanFeature label="מרפסת" value={property.hasBalcony ?? false} />
+    <BooleanFeature label="חניה" value={!!property.parking} />
+    {property.airConditioning ? (
+      <DetailItem text={`מיזוג: ${property.airConditioning}`} />
+    ) : (
+      <BooleanFeature label="מיזוג" value={false} />
+    )}
+    <BooleanFeature label="מחסן" value={property.warehouse ?? false} />
+    <BooleanFeature label='ממ"ד' value={property.mamad ?? false} />
+    <BooleanFeature label="נגישות" value={property.disabledAccess ?? false} />
+    <BooleanFeature label="משופץ" value={property.renovated ?? false} />
+    <BooleanFeature label="סורגים" value={property.bars ?? false} />
+    <DetailItem text={property.direction ? `כיווני אוויר: ${property.direction}` : undefined} />
+    <DetailItem text={property.boiler ? `דוד: ${property.boiler}` : undefined} />
+    <DetailItem icon={<BsCalendarCheck className="text-custom-gold" />} text={property.entryDate ? `פינוי: ${property.entryDate}` : undefined} />
+  </div>
+</section>
+
 
           {coordinates && typeof coordinates.lat === 'number' && typeof coordinates.lon === 'number' && (
             <section>
