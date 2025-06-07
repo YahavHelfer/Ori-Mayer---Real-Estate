@@ -97,7 +97,7 @@ export const getStaticProps: GetStaticProps<PropertyPageProps> = async (context)
       if (!apiUrl) {
         return { props: { property: null, coordinates: null }, revalidate: 60 };
       }
-      const res = await fetch(`${apiUrl}/properties/${id}`);
+      const res = await fetch(`${apiUrl}/api/properties/${id}`);
       
       if (res.ok) {
         property = await res.json();
@@ -189,7 +189,7 @@ export default function PropertyPage({ property, coordinates }: PropertyPageProp
   const pageDescription = property.description?.substring(0, 160) || `למכירה נכס במיקום מעולה: ${property.fullAddress}. פרטים נוספים באתר של אורי מאיר נדל"ן.`;
   const mainImageUrl = (lightboxSlides.length > 0) ? lightboxSlides[0].src : 'https://www.your-website-domain.com/default-share-image.jpg'; // <<< החלף בדומיין שלך ובתמונת ברירת מחדל
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
-  const pageUrl = `${siteUrl}/properties/${property.id}`;
+  const pageUrl = `${siteUrl}/api/properties/${property.id}`;
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -298,6 +298,7 @@ export default function PropertyPage({ property, coordinates }: PropertyPageProp
               <DetailItem icon={<LuRectangleVertical size="1.2em" />} text={property.area ? `${property.area} מ"ר` : undefined} />
               <DetailItem icon={<BsBuilding size="1.2em" />} text={property.floor !== null && property.floor !== undefined ? `קומה ${property.floor}${property.totalFloors ? ` מתוך ${property.totalFloors}` : ''}` : undefined} />
               <BooleanFeature label="מעלית" value={property.hasElevator} icon={<MdElevator size="1.2em" />} />
+              
             </div>
 
             <div className="mt-auto pt-6 border-t space-y-3">
@@ -338,23 +339,36 @@ export default function PropertyPage({ property, coordinates }: PropertyPageProp
 <section>
   <h2 className="text-2xl font-semibold text-gray-800 mb-4 border-b pb-2">מאפייני הנכס</h2>
   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-4 text-gray-700">
-    <BooleanFeature label="מרפסת" value={property.hasBalcony ?? false} />
-    <BooleanFeature label="חניה" value={!!property.parking} />
-    {property.airConditioning ? (
+
+    <BooleanFeature label="מרפסת" value={property.hasBalcony === true} />
+
+    <BooleanFeature
+      label="חניה"
+      value={!!property.parking && property.parking !== 'אין'}
+    />
+
+    {property.airConditioning && property.airConditioning !== 'אין' ? (
       <DetailItem text={`מיזוג: ${property.airConditioning}`} />
     ) : (
       <BooleanFeature label="מיזוג" value={false} />
     )}
-    <BooleanFeature label="מחסן" value={property.warehouse ?? false} />
-    <BooleanFeature label='ממ"ד' value={property.mamad ?? false} />
-    <BooleanFeature label="נגישות" value={property.disabledAccess ?? false} />
-    <BooleanFeature label="משופץ" value={property.renovated ?? false} />
-    <BooleanFeature label="סורגים" value={property.bars ?? false} />
+
+    <BooleanFeature label="מחסן" value={property.warehouse === true} />
+    <BooleanFeature label='ממ"ד' value={property.mamad === true} />
+    <BooleanFeature label="נגישות" value={property.disabledAccess === true} />
+    <BooleanFeature label="משופץ" value={property.renovated === true} />
+    <BooleanFeature label="סורגים" value={property.bars === true} />
+
     <DetailItem text={property.direction ? `כיווני אוויר: ${property.direction}` : undefined} />
     <DetailItem text={property.boiler ? `דוד: ${property.boiler}` : undefined} />
-    <DetailItem icon={<BsCalendarCheck className="text-custom-gold" />} text={property.entryDate ? `פינוי: ${property.entryDate}` : undefined} />
+    <DetailItem
+      icon={<BsCalendarCheck className="text-custom-gold" />}
+      text={property.entryDate ? `פינוי: ${property.entryDate}` : undefined}
+    />
+    
   </div>
 </section>
+
 
 
           {coordinates && typeof coordinates.lat === 'number' && typeof coordinates.lon === 'number' && (
