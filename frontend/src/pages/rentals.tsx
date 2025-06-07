@@ -20,7 +20,7 @@ export const getStaticProps: GetStaticProps<RentalsPageProps> = async (context) 
       return { props: { initialRentalProperties: [] }, revalidate: 60 };
     }
     // משיכת נכסים להשכרה
-    const res = await fetch(`${apiUrl}/properties/rent`); 
+    const res = await fetch(`${apiUrl}/api/properties/rent`); 
     
     if (res.ok) {
       initialRentalProperties = await res.json();

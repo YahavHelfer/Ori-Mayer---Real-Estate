@@ -20,7 +20,7 @@ export const getStaticProps: GetStaticProps<SalesPageProps> = async (context) =>
       return { props: { initialSaleProperties: [] }, revalidate: 60 };
     }
     // משיכת נכסים למכירה
-    const res = await fetch(`${apiUrl}/properties/sale`); 
+    const res = await fetch(`${apiUrl}/api/properties/sale`);
     
     if (res.ok) {
       initialSaleProperties = await res.json();
