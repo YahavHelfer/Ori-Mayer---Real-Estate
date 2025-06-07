@@ -339,7 +339,7 @@ export default function PropertyPage({ property, coordinates }: PropertyPageProp
              <h2 className="text-2xl font-semibold text-gray-800 mb-4 border-b pb-2">מאפייני הנכס</h2>
              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-4 text-gray-700">
                  <BooleanFeature label="מרפסת" value={property.hasBalcony} />
-                 <BooleanFeature label="חניה" value={property.hasParking} />
+                 <BooleanFeature label="חניה" value={property.Parking} />
                  {property.airConditioningType ? 
                     <DetailItem text={`מיזוג: ${property.airConditioningType}`} /> :
                     <BooleanFeature label="מיזוג" value={property.hasAirConditioning} />
