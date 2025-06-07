@@ -23,6 +23,8 @@ export interface Property {
   hasElevator?: boolean; // הוספה של השדה החסר
   officeDetails?: {
     tel1?: string;
+    email?: string; // 👈 הוסף את זה
+
   };
 }
 
