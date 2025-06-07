@@ -338,12 +338,13 @@ export default function PropertyPage({ property, coordinates }: PropertyPageProp
           <section>
              <h2 className="text-2xl font-semibold text-gray-800 mb-4 border-b pb-2">מאפייני הנכס</h2>
              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-4 text-gray-700">
-                 <BooleanFeature label="מרפסת" value={property.hasBalcony} />
-                 <BooleanFeature label="חניה" value={!!property.parking} />
-                 {property.airConditioningType ? 
-                    <DetailItem text={`מיזוג: ${property.airConditioningType}`} /> :
-                    <BooleanFeature label="מיזוג" value={property.hasAirConditioning} />
-                 }
+             <BooleanFeature label="מרפסת" value={property.hasBalcony ?? false} />
+<BooleanFeature label="חניה" value={!!property.parking} />
+{property.airConditioning ? (
+  <DetailItem text={`מיזוג: ${property.airConditioning}`} />
+) : (
+  <BooleanFeature label="מיזוג" value={false} />
+)}
                  <BooleanFeature label="מחסן" value={property.hasStorage} />
                  <BooleanFeature label='ממ"ד' value={property.hasSecureRoom} />
                  <BooleanFeature label="נגישות" value={property.isAccessible} />
