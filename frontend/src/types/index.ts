@@ -20,6 +20,7 @@ export interface Property {
   agentName?: string | null;
   agentPhone?: string | null;
   isSoldOrRented?: boolean | null;
+  hasElevator?: boolean; // הוספה של השדה החסר
 }
 
 // 👇 עדכנתי את הטיפוס הזה שיתאים בדיוק לנתונים שלך
