@@ -1,9 +1,17 @@
-// src/types/index.ts
+export interface OfficeDetails {
+  office?: string;
+  officeName?: string;
+  tel1?: string;
+  email?: string;
+  officeCity?: string;
+  officeAddress?: string;
+  description?: string;
+}
 
 export interface Property {
   id: string;
-  transactionType?: string | null;
-  propertyType?: string | null;
+  transactionType?: string | null; // מכירה / השכרה
+  propertyType?: string | null; // דירה / קוטג' וכו'
   city?: string | null;
   neighborhood?: string | null;
   street?: string | null;
@@ -16,19 +24,31 @@ export interface Property {
   totalFloors?: number | null;
   area?: number | null;
   hasBalcony?: boolean | null;
+  isSoldOrRented?: boolean | null;
+  hasElevator?: boolean | null;
+  description?: string | null; // נוספה לפי comments2
+  direction?: string | null; // מז/מע/דר וכו'
+  parking?: string | null; // יש / אין / רשומה
+  renovated?: boolean | null;
+  mamad?: boolean | null; // ממ"ד
+  bars?: boolean | null; // סורגים
+  warehouse?: boolean | null;
+  disabledAccess?: boolean | null;
+  entryDate?: string | null;
+  front?: string | null;
+  kitchen?: string | null;
+  toilet?: string | null;
+  airConditioning?: string | null;
+  boiler?: string | null;
+  cellar?: string | null;
   images?: string[] | null;
+
   agentName?: string | null;
   agentPhone?: string | null;
-  isSoldOrRented?: boolean | null;
-  hasElevator?: boolean; // הוספה של השדה החסר
-  officeDetails?: {
-    tel1?: string;
-    email?: string; // 👈 הוסף את זה
 
-  };
+  officeDetails?: OfficeDetails;
 }
 
-// 👇 עדכנתי את הטיפוס הזה שיתאים בדיוק לנתונים שלך
 export interface Testimonial {
   id: number;
   name: string;
