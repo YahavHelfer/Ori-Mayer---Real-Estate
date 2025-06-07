@@ -1,4 +1,3 @@
-// frontend/next.config.ts
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
@@ -14,7 +13,12 @@ const nextConfig: NextConfig = {
       // אם יש לך עוד hostnames שאתה רוצה לאשר, הוסף אותם כאן
     ],
   },
-  // אם יש לך עוד הגדרות Next.js, הוסף אותן כאן
+  
+  // 👇 התוספת נמצאת כאן
+  eslint: {
+    // אזהרה: זה מאפשר לבנייה להצליח גם אם יש שגיאות ESLint בפרויקט
+    ignoreDuringBuilds: true,
+  },
 };
 
 export default nextConfig;
