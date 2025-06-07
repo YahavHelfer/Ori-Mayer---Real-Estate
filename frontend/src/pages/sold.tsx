@@ -19,7 +19,7 @@ export const getServerSideProps: GetServerSideProps<SoldPageProps> = async (cont
       return { props: { initialSoldProperties: [] } };
     }
     //  מושך נכסים שנמכרו/הושכרו
-    const res = await fetch(`${apiUrl}/properties/sold`); 
+    const res = await fetch(`${apiUrl}/api/properties/sold`); 
 
     if (res.ok) {
       initialSoldProperties = await res.json();

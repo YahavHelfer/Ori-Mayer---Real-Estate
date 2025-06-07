@@ -23,7 +23,7 @@ export const getStaticProps: GetStaticProps<HomePageProps> = async (context) => 
       console.error("API URL not configured in .env.local");
       return { props: { initialProperties: [] }, revalidate: 60 }; // עדיין נחזיר revalidate גם במקרה שגיאה
     }
-    const res = await fetch(`${apiUrl}/properties`);
+    const res = await fetch(`${apiUrl}/api/properties`);
 
     if (res.ok) {
       initialProperties = await res.json();
