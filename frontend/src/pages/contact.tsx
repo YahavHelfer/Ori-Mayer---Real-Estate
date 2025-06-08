@@ -61,7 +61,7 @@ export default function ContactPage() {
         return;
       }
 
-      const response = await fetch(`${backendApiUrl}/send-inquiry`, { 
+      const response = await fetch(`${backendApiUrl}/api/send-inquiry`, { 
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
