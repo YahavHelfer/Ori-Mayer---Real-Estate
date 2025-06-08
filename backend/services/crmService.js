@@ -23,29 +23,27 @@ const safeParseInt = (val) => {
     return isNaN(num) ? null : num;
 };
 
+// 👇 --- תיקון כאן --- 👇
 const parseStringToBoolean = (str) => {
-    if (str === null || str === undefined) return false; // או null, תלוי בדרישה
-    return String(str).toLowerCase() === 'true';
+    // אם הערך ריק, החזר null כדי שה-frontend ידע להציג "-"
+    if (str === null || str === undefined || str === '') return null; 
+    return String(str).toLowerCase() === 'true' || String(str) === '1';
 };
 
+// 👇 --- ותיקון כאן --- 👇
 const parseYesNoToBoolean = (textValue) => {
-    if (typeof textValue !== 'string') return false;
-    const lowerText = textValue.toLowerCase();
+    // אם הערך ריק, החזר null
+    if (textValue === null || textValue === undefined || textValue === '') return null;
+    const lowerText = String(textValue).toLowerCase();
     return lowerText === 'כן' || lowerText === 'יש';
 };
-
-
-// הפונקציה מקבלת את אובייקט הנכס מה-XML, את כל מערך התמונות, ואת פרטי המשרד
-// backend/services/crmService.js
-
-// ... (שאר פונקציות העזר כמו ensureArray, safeParseFloat, safeParseInt, parseStringToBoolean, parseYesNoToBoolean נשארות כפי שהן) ...
 
 // הפונקציה מקבלת את אובייקט הנכס מה-XML, את כל מערך התמונות, ואת פרטי המשרד והסוכן
 const mapNewXmlPropertyToModel = (xmlProperty, allPicturesFromServer, officeProfileData, agentProfileData) => {
     if (!xmlProperty) return null;
-  
+ 
     const propertyId = String(xmlProperty.serial || new Date().getTime()); // ID הנכס
-  
+ 
     let images = [];
     if (allPicturesFromServer && allPicturesFromServer.length > 0) {
       images = allPicturesFromServer
@@ -53,38 +51,25 @@ const mapNewXmlPropertyToModel = (xmlProperty, allPicturesFromServer, officeProf
         .map(pic => pic.picurl)
         .filter(url => url && typeof url === 'string');
     }
-  
-    // --- שינוי כאן: קביעת isSoldOrRented על בסיס gishaYN ---
-    // ההנחה היא ש-gishaYN יהיה "true" (כמחרוזת) אם הנכס נמכר/הושכר
-    // ו-"false" (כמחרוזת) או לא קיים/ריק אם הנכס זמין.
-    // אם gishaYN מייצג במקור נגישות לנכים, ועכשיו משתמשים בו לסימון מכירה,
-    // נצטרך לוודא שהערך המקורי של נגישות לנכים נשמר בשדה אחר או לא רלוונטי יותר.
+ 
     const isSoldOrRented = parseStringToBoolean(xmlProperty.gishaYN);
-  
-    // קביעת isAccessible המקורי (נגישות לנכים)
-    // נצטרך להחליט אם השדה gishaYN המקורי עדיין רלוונטי להצגה,
-    // ואם כן, מאיפה לקחת את הנתון הזה עכשיו אם gishaYN משמש לסטטוס מכירה.
-    // כרגע, נניח ש-gishaYN *רק* משמש לסטטוס מכירה, והמידע על נגישות לא קיים יותר או לא רלוונטי.
-    // אם עדיין צריך להציג נגישות, תצטרך שדה אחר ב-XML עבור זה.
-    const isPropertyAccessible = false; //  הנחה זמנית, ראה הערה למעלה
-  
+ 
+    const isPropertyAccessible = false;
+ 
     const baseTransactionAction = String(xmlProperty.mainaction || '').trim();
     let displayTransactionType = baseTransactionAction;
-  
+ 
     if (baseTransactionAction === 'למכירה') {
       displayTransactionType = 'מכירה';
     } else if (baseTransactionAction === 'להשכרה') {
       displayTransactionType = 'השכרה';
     }
-    //  אם הנכס נמכר (isSoldOrRented = true), יכול להיות שנרצה ש-displayTransactionType יהיה "נמכר" או "הושכר"
-    //  בהתאם ל-mainaction המקורי. כרגע הוא יישאר "מכירה" או "השכרה".
-    //  לדוגמה, אם isSoldOrRented=true ו-baseTransactionAction="מכירה", אז displayTransactionType="מכירה" (אולי עדיף "נמכר"?)
-  
+
     const city = xmlProperty.city || '';
     const street = xmlProperty.street || '';
     let fullAddress = `${street}, ${city}`.replace(/ ,|,$/g, '').replace(/^, /g, '').trim();
     if (fullAddress === ',' || fullAddress === '') fullAddress = city;
-  
+ 
     return {
       id: propertyId,
       transactionType: displayTransactionType,
@@ -110,15 +95,15 @@ const mapNewXmlPropertyToModel = (xmlProperty, allPicturesFromServer, officeProf
       hasStorage: parseStringToBoolean(xmlProperty.machsanYN),
       hasSecureRoom: parseStringToBoolean(xmlProperty.mamadYN),
       
-      isAccessible: isPropertyAccessible, // <<< הערך המקורי של נגישות, אם עדיין רלוונטי ויש לו מקור אחר
+      isAccessible: isPropertyAccessible,
       isRenovated: parseStringToBoolean(xmlProperty.meshupatsYN),
       hasBars: parseStringToBoolean(xmlProperty.soragimYN),
-  
+ 
       description: xmlProperty.comments2 || '',
       images: images,
       agentName: xmlProperty.agent || (agentProfileData ? agentProfileData.agent : null),
       agentPhone: agentProfileData ? agentProfileData.agentTel1 : null,
-      isSoldOrRented: isSoldOrRented, // <<< זה עכשיו מבוסס על gishaYN
+      isSoldOrRented: isSoldOrRented,
       
       evacuationDate: xmlProperty.removal || null,
       directions: xmlProperty.direct || null,
@@ -128,16 +113,14 @@ const mapNewXmlPropertyToModel = (xmlProperty, allPicturesFromServer, officeProf
     };
   };
   
-  // ... (שאר הקובץ crmService.js, כולל fetchAndProcessProperties, נשאר אותו דבר) ...
-async function fetchAndProcessProperties() {
-    // ... (קוד משיכת ה-XML ו-parser נשאר דומה)
-    if (!CRM_XML_URL || CRM_XML_URL === "כאן_יבוא_ה-URL_של_קובץ_ה-XML_שלך") { // וכו'
+  async function fetchAndProcessProperties() {
+    if (!CRM_XML_URL || CRM_XML_URL === "כאן_יבוא_ה-URL_של_קובץ_ה-XML_שלך") {
         console.error("CRM_XML_URL is not configured properly in .env file.");
         throw new Error("CRM XML URL not configured.");
     }
 
     try {
-        console.log(`Workspaceing XML from: ${CRM_XML_URL}`);
+        console.log(`Fetching XML from: ${CRM_XML_URL}`);
         const response = await axios.get(CRM_XML_URL, { responseType: 'text' });
         const xmlData = response.data;
         console.log("XML data fetched successfully.");
@@ -148,41 +131,37 @@ async function fetchAndProcessProperties() {
         });
 
         const result = await parser.parseStringPromise(xmlData);
-        // אין צורך להדפיס את כל ה-JSON כל פעם, אלא אם כן יש בעיות חדשות. אפשר להפוך להערה.
-        // console.log("XML parsed successfully. Full structure:", JSON.stringify(result, null, 2));
 
         if (result && result.NewDataSet) {
             const propertiesData = result.NewDataSet.Properties;
             const picturesData = result.NewDataSet.pictures;
-            const officeProfile = result.NewDataSet.officeProfile; // שמירת פרטי המשרד
-            const agentProfile = result.NewDataSet.officeAgentsProfile; // שמירת פרטי הסוכן הכלליים
+            const officeProfile = result.NewDataSet.officeProfile;
+            const agentProfile = result.NewDataSet.officeAgentsProfile;
             
             const listingsArray = ensureArray(propertiesData);
             const picturesArray = ensureArray(picturesData);
 
             if (listingsArray.length === 0 || (listingsArray.length === 1 && Object.keys(listingsArray[0]).length === 0)) {
-                // בדיקה אם listingsArray מכיל אובייקט ריק אם Properties לא קיים או ריק ב-XML
                 console.warn("No 'Properties' items found in NewDataSet or 'Properties' is empty.");
                 return [];
             }
             
-            // אם רוצים לראות את מבנה התמונה הראשונה, אפשר להשאיר את זה (להפוך להערה אחרי שזה עובד)
-            // if (picturesArray.length > 0) {
-            //     console.log("Detailed structure of the first picture object (if exists):", JSON.stringify(picturesArray[0], null, 2));
-            // } else {
-            //     console.log("No 'pictures' array found or it is empty in NewDataSet.");
-            // }
-
             const mappedProperties = listingsArray.map(prop => mapNewXmlPropertyToModel(prop, picturesArray, officeProfile, agentProfile)).filter(p => p !== null && p.id !== null);
             
             console.log(`Mapped ${mappedProperties.length} properties.`);
+
+            // 👇 --- הוספנו את ההדפסה הזו כדי לראות את הנתונים --- 👇
+            if (mappedProperties.length > 0) {
+              console.log("Data of the first property:", JSON.stringify(mappedProperties[0], null, 2));
+            }
+            
             return mappedProperties;
         } else {
             console.warn("No NewDataSet found in XML or 'NewDataSet' is empty.");
             return [];
         }
     } catch (error) {
-        console.error('Error in fetchAndProcessProperties:', error.message, error.stack); // הדפסת ה-stack של השגיאה
+        console.error('Error in fetchAndProcessProperties:', error.message, error.stack);
         throw error;
     }
 }

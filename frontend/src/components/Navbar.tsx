@@ -29,7 +29,7 @@ export default function Navbar() {
 
   return (
     // אם ה-dir="rtl" מוגדר גלובלית (ב-_document.tsx), אין צורך בו כאן
-    <nav className="bg-custom-black text-gold-text px-4 py-2 shadow-lg sticky top-0 z-40"> {/* שינוי py-0 ל-py-2 */}
+    <nav className="bg-custom-black text-gold-text px-4 py-1 shadow-lg sticky top-0 z-40"> {/* שינוי py-0 ל-py-2 */}
       <div className="container mx-auto flex justify-between items-center">
         
         {/* לוגו - יהיה בצד שמאל (כי הוא ראשון ב-flex והדף LTR או שאנחנו "כופים" LTR על ה-Navbar) */}
@@ -40,7 +40,7 @@ export default function Navbar() {
             <Image 
               src="/images/Logo.png" // ודא שהנתיב נכון
               alt="אורי מאיר נדלן - לוגו" 
-              width={140} // התאם לגודל הרצוי
+              width={80} // התאם לגודל הרצוי
               height={32} // התאם לגודל הרצוי (py-2 נותן 16px, אז גובה ה-nav יהיה בערך 32px + גובה הפונט)
               priority 
               className="object-contain"

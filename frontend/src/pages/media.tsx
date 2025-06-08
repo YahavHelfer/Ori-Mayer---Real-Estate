@@ -49,7 +49,7 @@ const articlesData: MediaArticle[] = [
     title: 'דילמת 90/10 — האם שוק הנדל"ן לקראת עליית מחירים?',
     source: 'TheMarker',
     date: '10.03.2025',
-    link: 'https://www.themarker.com/realestate/2024-03-10/ty-article/.highlight/0000018e-282e-d2ed-a9cf-3cbe769b0000', // <<< תיקנתי את הקישור לדוגמה, החלף בקישור הנכון
+    link: 'https://www.themarker.com/news/internal-info/2024-01-23/ty-article/0000018d-35a9-db8f-a7df-37fbb0940000?source=android&utm_source=push_notification&utm_medium=app_push?utm_source=App_Share&utm_medium=Android_Native&utm_campaign=Share', // <<< תיקנתי את הקישור לדוגמה, החלף בקישור הנכון
     imageUrl: '/media-images/article4.jpg',
     excerpt: 'המתווך אורי מאיר סבור שיש כאן הזדמנות, בעיקר בדירות חדשות, שכן "יזמים וקבלנים יוצאים מגדרם כדי למכור, אין להם סבלנות לחכות שתהיה עליית מחירים".',
   },

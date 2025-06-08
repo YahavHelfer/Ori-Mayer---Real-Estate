@@ -8,6 +8,8 @@ let lastFetchTime = 0;
 const CACHE_DURATION_MS = 30 * 60 * 1000; // 30 דקות
 
 async function getProperties(req, res, next) {
+    console.log("===> getProperties middleware was hit! Request for path:", req.path); //  <-- הוסף את השורה הזו
+
     const now = Date.now();
     if (cachedProperties && (now - lastFetchTime < CACHE_DURATION_MS)) {
         console.log("Serving properties from cache.");
@@ -23,8 +25,8 @@ async function getProperties(req, res, next) {
         console.log(`Successfully fetched and cached ${cachedProperties.length} properties.`);
         next();
     } catch (error) {
+        // ... (שאר הפונקציה נשארת כפי שהיא)
         console.error('Failed to get properties:', error);
-        // אם המטמון עדיין קיים ויש שגיאה במשיכה חדשה, אפשר להחזיר את המטמון הישן
         if (cachedProperties) {
             console.warn("Serving stale cache due to fetch error.");
             req.properties = cachedProperties;
