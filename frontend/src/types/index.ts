@@ -1,63 +1,42 @@
-export interface OfficeDetails {
-  office?: string;
-  officeName?: string;
-  tel1?: string;
-  email?: string;
-  officeCity?: string;
-  officeAddress?: string;
-  description?: string;
-}
+// frontend/src/types/index.ts
 
 export interface Property {
   id: string;
-
-  transactionType?: string | null;   // מכירה / השכרה
-  propertyType?: string | null;      // דירה / קוטג' וכו'
+  transactionType?: string | null;
+  propertyType?: string | null;
   city?: string | null;
   neighborhood?: string | null;
   street?: string | null;
   houseNumber?: string | null;
   fullAddress?: string | null;
-
   price?: number | null;
   currency?: string | null;
-
   rooms?: number | null;
   floor?: number | null;
   totalFloors?: number | null;
   area?: number | null;
-
   hasBalcony?: boolean | null;
-  isSoldOrRented?: boolean | null;
-  hasElevator?: boolean | null;
-
-  description?: string | null;       // שדה לתיאור, למשל מהcomments2 ב-XML
-
-  direction?: string | null;         // מז/מע/דר וכו'
-
-  parking?: string | null;            // יש / אין / רשומה
-
-  renovated?: boolean | null;
-  mamad?: boolean | null;             // ממ"ד
-  bars?: boolean | null;              // סורגים
-  warehouse?: boolean | null;
-  disabledAccess?: boolean | null;
-
-  entryDate?: string | null;          // תאריך כניסה, מחרוזת
-
-  front?: string | null;              // חזית
-  kitchen?: string | null;
-  toilet?: string | null;
-  airConditioning?: string | null;
-  boiler?: string | null;
-  cellar?: string | null;
-
   images?: string[] | null;
-
   agentName?: string | null;
   agentPhone?: string | null;
+  isSoldOrRented?: boolean | null;
+  description?: string;
+  evacuationDate?: string | null;
+  directions?: string | null;
+  boiler?: string | null;
+  officeDetails?: any; // You can define a more specific type for this
 
-  officeDetails?: OfficeDetails;
+  // 👇 --- הוספתי את השדות הבוליאניים החסרים --- 👇
+  hasParking?: boolean | null;
+  hasElevator?: boolean | null;
+  numberOfElevators?: number;
+  hasAirConditioning?: boolean | null;
+  airConditioningType?: string | null;
+  hasStorage?: boolean | null;
+  hasSecureRoom?: boolean | null;
+  isAccessible?: boolean | null;
+  isRenovated?: boolean | null;
+  hasBars?: boolean | null;
 }
 
 export interface Testimonial {
