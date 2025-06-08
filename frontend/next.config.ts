@@ -1,8 +1,12 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  reactStrictMode: true, // או כל הגדרה אחרת שכבר קיימת
+  reactStrictMode: true,
   images: {
+    // 👇 --- זו ההגדרה שנוספה כדי למנוע קריסות --- 👇
+    unoptimized: true,
+
+    // הגדרת ה-remotePatterns נשארת כפי שהיא
     remotePatterns: [
       {
         protocol: 'https',
@@ -14,7 +18,6 @@ const nextConfig: NextConfig = {
     ],
   },
   
-  // 👇 התוספת נמצאת כאן
   eslint: {
     // אזהרה: זה מאפשר לבנייה להצליח גם אם יש שגיאות ESLint בפרויקט
     ignoreDuringBuilds: true,
