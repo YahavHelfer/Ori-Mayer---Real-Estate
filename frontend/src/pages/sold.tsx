@@ -60,7 +60,7 @@ export default function SoldPage({ initialSoldProperties }: SoldPageProps) {
   };
 
   // גובה נמוך יותר ל-Hero Slider
-  const sliderHeightClass = "h-[55vh] md:h-[45vh]"; 
+  const sliderHeightClass = "h-[70vh] md:h-[45vh]"; 
 
   return (
     <div>

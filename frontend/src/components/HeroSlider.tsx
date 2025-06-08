@@ -26,7 +26,7 @@ const images = [
 
 export default function HeroSlider({ 
   onSearch, 
-  heightClass = "h-[50vh] md:h-[65vh] lg:h-[calc(100vh-150px)]",
+  heightClass = "h-[70vh] md:h-[65vh] lg:h-[calc(100vh-150px)]",
   isCompact = false
 }: HeroSliderProps) {
   
