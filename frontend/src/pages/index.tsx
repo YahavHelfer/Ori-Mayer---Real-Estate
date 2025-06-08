@@ -104,6 +104,12 @@ export default function HomePage({ initialProperties }: HomePageProps) {
       <Head>
         <title>אורי מאיר נדל"ן - מתווך הבית שלך בתל אביב</title>
         <meta name="description" content="רשימת נכסים עדכנית למכירה ולהשכרה בתל אביב והסביבה. אורי מאיר - המומחה שלך לנדלן." />
+        <meta property="og:title" content='אורי מאיר נדל"ן - מתווך הבית שלך'  />
+        <meta property="og:description" content="רשימת נכסים עדכנית למכירה ולהשכרה בתל אביב והסביבה." />
+        <meta property="og:image" content="https://www.omrealestate.co.il/share-image.jpg" />
+        <meta property="og:url" content="https://www.omrealestate.co.il/" />
+        <meta property="og:type" content="website" />
+      
       </Head>
 
       <HeroSlider onSearch={handlePropertySearch} /> 
