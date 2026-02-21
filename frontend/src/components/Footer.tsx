@@ -189,6 +189,11 @@ const Footer = () => {
       </div>
       <div className="text-center text-gray-500 text-xs mt-10 pt-6 border-t border-gray-700/50 relative z-10">
         <p>&copy; {currentYear} כל הזכויות שמורות לאורי מאיר נדל"ן.</p>
+        <div className="mt-4">
+          <a href="/privacy-policy" className="text-white underline">
+            מדיניות פרטיות
+          </a>
+        </div>
       </div>
     </footer>
   );
