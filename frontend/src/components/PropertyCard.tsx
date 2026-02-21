@@ -28,7 +28,7 @@ export default function PropertyCard({ property, statusLabel }: PropertyCardProp
   return (
     <div 
       dir="rtl"
-      className="group bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden w-full sm:w-[340px] flex flex-col"
+      className="group ui-card bg-white overflow-hidden w-full sm:w-[340px] flex flex-col"
     >
       <Link href={`/properties/${property.id}`} className="block flex flex-col flex-grow">
         <div className="relative w-full h-56">

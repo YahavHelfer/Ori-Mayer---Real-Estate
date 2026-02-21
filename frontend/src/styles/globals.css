@@ -1,3 +1,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .ui-btn {
+    @apply inline-flex items-center justify-center rounded-lg px-6 py-2.5 font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed;
+  }
+
+  .ui-btn-primary {
+    @apply ui-btn bg-custom-black text-white hover:bg-gray-700 active:bg-gray-800 focus-visible:ring-custom-gold;
+  }
+
+  .ui-btn-secondary {
+    @apply ui-btn border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 active:bg-gray-100 focus-visible:ring-gray-500;
+  }
+
+  .ui-card {
+    @apply rounded-lg shadow-md transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5;
+  }
+
+  .ui-h2 {
+    @apply text-3xl sm:text-4xl font-bold leading-tight mb-4;
+  }
+
+  .ui-h3 {
+    @apply text-xl font-semibold leading-snug mb-3;
+  }
+
+  .ui-copy-gap {
+    @apply mt-3 leading-relaxed;
+  }
+}

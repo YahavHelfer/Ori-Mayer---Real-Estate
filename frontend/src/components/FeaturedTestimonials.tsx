@@ -47,13 +47,13 @@ export default function FeaturedTestimonials() {
     <section className="bg-white py-16 md:py-20" dir="rtl">
       <div className="container mx-auto px-4">
         <header className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-800">לקוחות ממליצים</h2>
+          <h2 className="ui-h2 text-gray-800">לקוחות ממליצים</h2>
         </header>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {featured.map((testimonial) => (
-            <div key={testimonial.id} className="bg-gray-50 p-6 rounded-lg shadow-lg text-center">
+            <div key={testimonial.id} className="ui-card bg-gray-50 p-6 text-center">
               {testimonial.rating && <StarRating rating={testimonial.rating} />}
-              <p className="text-gray-700 my-4 italic">"{testimonial.text}"</p>
+              <p className="ui-copy-gap text-gray-700 my-4 italic">"{testimonial.text}"</p>
               <p className="font-semibold text-custom-black">{testimonial.name}</p>
               <p className="text-sm text-gray-500">{testimonial.role}</p>
             </div>

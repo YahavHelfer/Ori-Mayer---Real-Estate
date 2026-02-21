@@ -119,7 +119,7 @@ export default function ContactPropertyModal({ isOpen, closeModal, property, rea
               <Dialog.Panel className="w-full max-w-lg transform overflow-hidden rounded-2xl bg-white p-6 md:p-8 text-right align-middle shadow-xl transition-all">
                 <Dialog.Title
                   as="h3"
-                  className="text-xl lg:text-2xl font-semibold leading-tight text-gray-900 mb-1"
+                  className="ui-h3 lg:text-2xl text-gray-900 mb-1"
                 >
                   יצירת קשר בנוגע לנכס:
                 </Dialog.Title>
@@ -187,13 +187,13 @@ export default function ContactPropertyModal({ isOpen, closeModal, property, rea
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="inline-flex justify-center rounded-md border border-transparent bg-custom-gold px-6 py-2.5 text-sm font-medium text-white hover:bg-opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:opacity-50"
+                      className="ui-btn bg-custom-gold text-white hover:bg-opacity-80 focus-visible:ring-custom-gold text-sm"
                     >
                       {isSubmitting ? 'שולח...' : 'שלח פנייה'}
                     </button>
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md border border-gray-300 px-6 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2"
+                      className="ui-btn ui-btn-secondary text-sm"
                       onClick={closeModal}
                       disabled={isSubmitting}
                     >
