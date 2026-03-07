@@ -115,7 +115,15 @@ export default function HomePage({ initialProperties }: HomePageProps) {
   ];
 
   const getPropertyTimestamp = (property: Property): number | null => {
-    const rawProperty = property as Record<string, unknown>;
+    type PropertyDateFields = {
+      createdAt?: string | number;
+      publishedAt?: string | number;
+      dateAdded?: string | number;
+      created_at?: string | number;
+      published_at?: string | number;
+      date_added?: string | number;
+    };
+    const rawProperty = property as unknown as PropertyDateFields;
     const dateCandidates = [
       rawProperty.createdAt,
       rawProperty.publishedAt,
