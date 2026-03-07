@@ -17,12 +17,12 @@ export default function AboutPage() {
         <Image
           src="/hero-images/hero2.jpg" // החלף בתמונה מתאימה (יכולה להיות אותה תמונה מהסליידר, או תמונת נוף אורבני אחרת)
           alt="רקע של תל אביב"
-          layout="fill"
-          objectFit="cover"
+          fill
+          style={{ objectFit: 'cover' }}
           className="opacity-40"
         />
         <div className="relative z-10 text-center px-4">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold">הסיפור מאחורי ההצלחה שלך</h1>
+          <h1 className="hero-title">הסיפור מאחורי ההצלחה שלך</h1>
           <p className="mt-4 text-lg sm:text-xl text-gray-200">הדרך שלי לליווי עסקאות נדל"ן מנצחות</p>
         </div>
       </div>
@@ -36,8 +36,8 @@ export default function AboutPage() {
                 <Image
                   src="/images/OriMayer.jpg" // <<< החלף בתמונת פרופיל מקצועית שלך (שים ב-public/images)
                   alt="אורי מאיר - מתווך נדלן"
-                  layout="fill"
-                  objectFit="cover"
+                  fill
+                  style={{ objectFit: 'cover' }}
                 />
               </div>
             </div>

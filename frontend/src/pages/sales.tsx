@@ -47,7 +47,6 @@ export default function SalesPage({ initialSaleProperties }: SalesPageProps) {
   }, [initialSaleProperties]);
 
   const handlePropertySearch = (filters: FilterValues) => {
-    console.log("Sale search filters received:", filters);
     let tempProperties = [...initialSaleProperties];
     
     // לוגיקת הסינון נשארת זהה

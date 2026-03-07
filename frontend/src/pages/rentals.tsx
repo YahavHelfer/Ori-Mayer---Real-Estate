@@ -47,7 +47,6 @@ export default function RentalsPage({ initialRentalProperties }: RentalsPageProp
   }, [initialRentalProperties]);
 
   const handlePropertySearch = (filters: FilterValues) => {
-    console.log("Rental search filters received:", filters);
     let tempProperties = [...initialRentalProperties];
 
     // לוגיקת הסינון

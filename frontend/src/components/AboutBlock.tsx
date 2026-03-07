@@ -13,8 +13,8 @@ export default function AboutBlock() {
               <Image
                 src="/images/OriMayer.jpg" // <<< ודא שהתמונה קיימת ב-public/images
                 alt="אורי מאיר - מומחה לנדלן בתל אביב"
-                layout="fill"
-                objectFit="cover"
+                fill
+                style={{ objectFit: 'cover' }}
               />
             </div>
           </div>

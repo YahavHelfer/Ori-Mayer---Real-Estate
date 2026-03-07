@@ -2,7 +2,84 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes heroEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-entrance {
+  animation: heroEntrance 750ms ease-out both;
+}
+
+@keyframes heroZoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.05);
+  }
+}
+
+.hero-zoom {
+  animation: heroZoom 4500ms ease-out both;
+}
+
+@keyframes heroProgress {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.hero-progress-fill {
+  animation: heroProgress 4500ms linear forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-entrance {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero-zoom {
+    animation: none;
+  }
+
+  .hero-progress-fill {
+    animation: none;
+    width: 35%;
+    opacity: 0.55;
+  }
+}
+
+@layer base {
+  html,
+  body {
+    @apply font-sans;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+}
+
 @layer components {
+  .hero-title {
+    @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white shadow-lg;
+  }
+
   .ui-btn {
     @apply inline-flex items-center justify-center rounded-lg px-6 py-2.5 font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed;
   }

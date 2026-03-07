@@ -28,7 +28,7 @@ export default function PropertyCard({ property, statusLabel }: PropertyCardProp
   return (
     <div 
       dir="rtl"
-      className="group ui-card bg-white overflow-hidden w-full sm:w-[340px] flex flex-col"
+      className="group ui-card bg-white border border-black/10 overflow-hidden w-full sm:w-[340px] flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-custom-gold/50"
     >
       <Link href={`/properties/${property.id}`} className="block flex flex-col flex-grow">
         <div className="relative w-full h-56">
@@ -39,7 +39,7 @@ export default function PropertyCard({ property, statusLabel }: PropertyCardProp
             style={{ objectFit: 'cover' }}
             priority={true}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 340px"
-            className="group-hover:scale-105 transition-transform duration-300"
+            className="group-hover:scale-105 transition-transform duration-500"
             onError={(e) => {
               (e.target as HTMLImageElement).onerror = null;
               (e.target as HTMLImageElement).src = '/placeholder-image.jpg';

@@ -1,4 +1,16 @@
 # Dependencies
+node_modules
+
+# Build artifacts
+.next
+out
+dist
+build
+
+# Environment variables
+.env.local
+.env
+# Dependencies
 # =========================
 # התעלם מתיקיות התלויות של שני הפרויקטים
 /frontend/node_modules

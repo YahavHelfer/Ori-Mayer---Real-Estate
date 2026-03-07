@@ -3,6 +3,7 @@ import React, { ReactNode } from 'react';
 import TopBanner from './TopBanner';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import CookieBanner from './CookieBanner'; // Importing CookieBanner
 import FloatingWhatsAppButton from './FloatingWhatsAppButton'; // <<< ייבוא הכפתור הצף
 
 
@@ -23,6 +24,7 @@ const Layout = ({ children }: LayoutProps) => {
       <main className="flex-grow w-full"> {/* main עדיין תופס את כל הגובה הפנוי */}
         {children}
       </main>
+      <CookieBanner />
       <Footer />
       <FloatingWhatsAppButton /> {/* <<< הוספת הכפתור כאן */}
 

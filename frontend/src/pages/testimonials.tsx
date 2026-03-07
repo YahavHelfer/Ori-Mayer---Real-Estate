@@ -84,13 +84,13 @@ export default function TestimonialsPage() {
         <Image
           src="/hero-images/hero1.jpg" // <<< החלף בתמונה מתאימה
           alt="רקע של תל אביב"
-          layout="fill"
-          objectFit="cover"
+          fill
+          style={{ objectFit: 'cover' }}
           className="opacity-40"
           priority
         />
         <div className="relative z-10 px-4">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold">מה הלקוחות שלנו אומרים</h1>
+          <h1 className="hero-title">מה הלקוחות שלנו אומרים</h1>
           <p className="mt-4 text-lg sm:text-xl text-gray-200">שביעות הרצון שלכם היא ההצלחה שלנו.</p>
         </div>
       </div>
@@ -106,7 +106,7 @@ export default function TestimonialsPage() {
                     {testimonial.avatarUrl ? (
                       <div className="flex items-center">
                         <div className="relative w-16 h-16 rounded-full overflow-hidden ml-4 border-2 border-custom-gold">
-                          <Image src={testimonial.avatarUrl} alt={testimonial.name} layout="fill" objectFit="cover" />
+                          <Image src={testimonial.avatarUrl} alt={testimonial.name} fill style={{ objectFit: 'cover' }} />
                         </div>
                         <div>
                           <h3 className="text-lg font-semibold text-custom-black">{testimonial.name}</h3>

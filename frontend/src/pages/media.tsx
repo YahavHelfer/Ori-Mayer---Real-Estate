@@ -77,13 +77,13 @@ export default function MediaPage() {
         <Image
           src="/hero-images/hero4.jpg" // <<< החלף בתמונה מתאימה
           alt="רקע של עיתונים או מדיה"
-          layout="fill"
-          objectFit="cover"
+          fill
+          style={{ objectFit: 'cover' }}
           className="opacity-40"
           priority
         />
         <div className="relative z-10 px-4">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold">אורי מאיר בתקשורת</h1>
+          <h1 className="hero-title">אורי מאיר בתקשורת</h1>
           <p className="mt-4 text-lg sm:text-xl text-gray-200">כתבות, ראיונות וניתוחי שוק</p>
         </div>
       </div>
@@ -100,8 +100,8 @@ export default function MediaPage() {
                       <Image 
                         src={article.imageUrl} 
                         alt={article.title}
-                        layout="fill" 
-                        objectFit="cover"
+                        fill
+                        style={{ objectFit: 'cover' }}
                         className="group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>

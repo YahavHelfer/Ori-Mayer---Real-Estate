@@ -103,13 +103,13 @@ export default function ContactPage() {
         <Image
           src="/hero-images/hero3.jpg" // <<< ודא שהתמונה הזו קיימת ב-public/hero-images
           alt="רקע של תל אביב"
-          layout="fill"
-          objectFit="cover"
+          fill
+          style={{ objectFit: 'cover' }}
           className="opacity-40"
           priority
         />
         <div className="relative z-10 px-4">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold">צור קשר</h1>
+          <h1 className="hero-title">צור קשר</h1>
           <p className="mt-4 text-lg sm:text-xl text-gray-200">נשמח לעמוד לשירותכם בכל שאלה ועניין</p>
         </div>
       </div>
