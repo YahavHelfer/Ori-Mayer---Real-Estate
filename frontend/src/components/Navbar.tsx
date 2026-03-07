@@ -18,6 +18,7 @@ export default function Navbar() {
     { href: "/contact", label: "צור קשר" },
     { href: "/sold", label: "נכסים שנמכרו" },
     { href: "/rentals", label: "להשכרה" },
+    { href: "/community-support", label: "ליווי קהילות" },
     { href: "/sales", label: "למכירה" },
     { href: "/", label: "בית" },
 
