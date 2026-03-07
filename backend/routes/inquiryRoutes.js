@@ -29,6 +29,13 @@ router.post('/send-inquiry', async (req, res) => {
     return res.status(500).json({ success: false, message: 'שגיאת תצורה בשרת. לא ניתן לשלוח את הפנייה כרגע.' });
   }
 
+  console.log('SMTP env presence:', {
+    EMAIL_FROM_ADDRESS: Boolean(process.env.EMAIL_FROM_ADDRESS),
+    RECIPIENT_EMAIL: Boolean(process.env.RECIPIENT_EMAIL),
+    SMTP_USER: Boolean(process.env.SMTP_USER),
+    SMTP_PASS: Boolean(process.env.SMTP_PASS),
+  });
+
   // יצירת Transporter של Nodemailer באמצעות משתני הסביבה
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
@@ -71,13 +78,29 @@ router.post('/send-inquiry', async (req, res) => {
   };
 
   try {
+    try {
+      await transporter.verify();
+      console.log('SMTP transporter.verify() succeeded');
+    } catch (error) {
+      console.error('SMTP transporter.verify() failed:', {
+        message: error?.message,
+        code: error?.code,
+        response: error?.response,
+      });
+      return res.status(500).json({ success: false, message: 'אירעה שגיאה פנימית בשליחת הפנייה. אנא נסה שוב מאוחר יותר או פנה ישירות.' });
+    }
+
     console.log(`Attempting to send email via Nodemailer to: ${process.env.RECIPIENT_EMAIL}`);
     let info = await transporter.sendMail(mailOptions);
     console.log('Email sent successfully! Message ID:', info.messageId);
     // console.log('Preview URL (if available, for some transporters like Ethereal): %s', nodemailer.getTestMessageUrl(info));
     res.status(200).json({ success: true, message: 'הפנייה נשלחה בהצלחה! ניצור איתך קשר בהקדם.' });
   } catch (error) {
-    console.error('Error sending email with Nodemailer:', error);
+    console.error('Error sending email with Nodemailer:', {
+      message: error?.message,
+      code: error?.code,
+      response: error?.response,
+    });
     // שקול אם להחזיר הודעה גנרית יותר למשתמש, ולתעד את השגיאה המפורטת בצד השרת בלבד.
     res.status(500).json({ success: false, message: 'אירעה שגיאה פנימית בשליחת הפנייה. אנא נסה שוב מאוחר יותר או פנה ישירות.' });
   }
